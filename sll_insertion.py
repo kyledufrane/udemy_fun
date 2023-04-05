@@ -51,6 +51,14 @@ class SLL:
             prev.next = HeadValue.next
             HeadValue = None
 
+    def getCount(self):
+        tmp = self.head
+        count = 0
+
+        while tmp:
+            count += 1
+            tmp = tmp.next
+        return count
 
     def listprint(self):
         output = self.head
@@ -71,5 +79,7 @@ list1.AtEnd('Thurs')
 list1.AtEnd('Fri')
 list1.AtStart('Sat')
 list1.Inbetween(list1.head, 'Sun')
-list1.DeleteNode('Mon')
+# list1.DeleteNode('Mon')
+
+print('Count =', list1.getCount())
 list1.listprint()
