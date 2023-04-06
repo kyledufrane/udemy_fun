@@ -60,6 +60,62 @@ class SLL:
             tmp = tmp.next
         return count
 
+    def remove_duplicates(self):
+        ptr1 = self.head
+
+        while ptr1 is not None and ptr1.next is not None:
+            ptr2 = ptr1
+            while ptr2.next is not None:
+                if ptr1.data == ptr2.next.data:
+                    ptr2.next = ptr2.next.next
+                else:
+                    ptr2 = ptr2.next
+            ptr1 = ptr1.next
+
+    def remove_from_sorted(self):
+        if self.head is None and self.head.next is None:
+            return
+        current = self.head
+        while current.next:
+            if current.data == current.next.data:
+                current.next = current.next.next
+            else:
+                current = current.next
+        return
+
+    def swapNodes(self, x, y):
+        if x == y:
+            return
+
+        prevX = None
+        currX = self.head
+        while currX is not None and currX.data != x:
+            prevX = currX
+            currX = currX.next
+
+        prevY = None
+        currY = self.head
+        while currY is not None and currY.data != y:
+            prevY = currY
+            currY = currY.next
+
+        if currX is None or currY is None:
+            return
+
+        if prevX is not None:
+            prevX.next = currY
+        else:
+            self.head = currY
+
+        if prevY is not None:
+            prevY.next = currX
+        else:
+            self.head = currX
+
+        temp = currX.next
+        currX.next = currY.next
+        currY.next = temp
+
     def listprint(self):
         output = self.head
         while output is not None:
@@ -68,18 +124,24 @@ class SLL:
 
 
 list1 = SLL()
-list1.head = Node('Mon')
-e2 = Node('Tues')
-e3 = Node('Wed')
+list1.head = Node(10)
+e2 = Node(20)
+e3 = Node(30)
 
 list1.head.next = e2
 e2.next = e3
 
-list1.AtEnd('Thurs')
-list1.AtEnd('Fri')
-list1.AtStart('Sat')
-list1.Inbetween(list1.head, 'Sun')
+list1.AtEnd(40)
+list1.AtEnd(50)
+list1.AtEnd(60)
+# list1.Inbetween(list1.head, 70)
 # list1.DeleteNode('Mon')
 
-print('Count =', list1.getCount())
+print('the sll before Swapping Nodes')
+# list1.remove_duplicates()
+# list1.DeleteNode('Mon')
+# list1.remove_from_sorted()
+list1.listprint()
+print('the sll after swapping nodes')
+list1.swapNodes(10, 20)
 list1.listprint()
